@@ -1,0 +1,24 @@
+<section data-ng-controller="QuestionController" data-ng-init="find()">
+    <div class="panel panel-default" data-ng-repeat="question in questions">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{question.title}} <button type="button" data-ng-show="global.user" data-ng-click="remove(this.question)" class="btn btn-xs btn-default btn-delete"><span class="glyphicon glyphicon-remove"></span></button></h3>
+        </div>
+        <div class="panel-body">
+            <ol>
+                <li data-ng-repeat="answer in question.answers">
+                    {{answer.title}} 
+                    <div class="row">
+
+                        <div class="col-sm-11">
+                            <progressbar  animate="false" class="active" max="totalCount(this.$parent.question)" value="answer.count" type="default"><i>{{answer.count}} / {{totalCount(this.$parent.question)}}</i>
+                            </progressbar>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-default btn-xs" data-ng-class='{"btn-info":answer._id == question.likedAnswer}' data-ng-disabled='answer._id == question.likedAnswer' data-ng-click="like()">Like <span class="glyphicon glyphicon-thumbs-up"></span></button>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
